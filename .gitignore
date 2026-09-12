@@ -1,0 +1,17 @@
+# ОС и редакторы
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# Node (если появятся зависимости)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Локальные секреты и окружение
+.env
+.env.*
+*.local

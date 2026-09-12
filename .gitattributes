@@ -1,0 +1,14 @@
+# Единые переводы строк в репозитории (LF), чтобы файлы одинаково
+# выглядели на Windows, macOS и Linux.
+* text=auto eol=lf
+
+# Бинарные типы
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary

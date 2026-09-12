@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Направление B — Каталог-витрина | ТехноДом Пенза</title>
+<meta name="robots" content="noindex">
+<!-- font-stack: Manrope (sans-only direction) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#f3f4f6; --card:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+    --teal:#0f766e; --teal-dark:#0b5c56; --teal-soft:#ecfdf5; --sale:#dc2626;
+    --r:12px; --pill:999px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--canvas);color:var(--ink);line-height:1.5;
+    font-family:"Manrope","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{margin:0 0 .4em;line-height:1.15;letter-spacing:-.02em;font-weight:800}
+  h1{font-size:clamp(24px,3vw,34px)} h2{font-size:22px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  .topbar{background:var(--ink);color:#cbd5e1;font-size:12.5px}
+  .topbar .wrap{display:flex;justify-content:space-between;min-height:36px;align-items:center;gap:12px;flex-wrap:wrap}
+  .topbar b{color:#fff}
+  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+  .head{display:flex;align-items:center;gap:20px;padding:14px 0;flex-wrap:wrap}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
+  .logo i{width:36px;height:36px;border-radius:10px;background:var(--teal);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:800}
+  .search{flex:1;min-width:240px;display:flex;gap:8px}
+  .search input{flex:1;min-width:0;height:46px;padding:0 16px;border:1px solid var(--line);border-radius:var(--r);font-size:15px;font-family:inherit;background:#fff}
+  .search input:focus{border-color:var(--teal);outline:3px solid var(--teal-soft)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;min-height:46px;
+    border-radius:var(--r);border:1px solid transparent;font-weight:700;font-size:14.5px;cursor:pointer;font-family:inherit;white-space:nowrap;background:#fff}
+  .btn-primary{background:var(--teal);color:#fff}
+  .btn-primary:hover{background:var(--teal-dark)}
+  .btn-outline{border-color:var(--line);color:var(--ink)}
+  .btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+  .chipbar{display:flex;gap:8px;overflow:auto;padding:12px 0}
+  .chip{flex:none;padding:8px 14px;border-radius:var(--pill);background:#fff;border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--ink)}
+  .chip.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .hero{background:#fff;border-bottom:1px solid var(--line)}
+  .hero .wrap{padding:30px 20px 26px}
+  .hero p{color:var(--muted);max-width:62ch;margin:6px 0 0}
+  .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:22px 0 0}
+  .cat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;font-weight:700}
+  .cat small{display:block;color:var(--muted);font-weight:500;margin-top:4px}
+  .cat:hover{border-color:var(--teal)}
+  main{padding:26px 0 60px}
+  .layout{display:grid;grid-template-columns:230px 1fr;gap:22px;align-items:start}
+  .side{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;position:sticky;top:88px}
+  .side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+  .side label{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:14px;color:#374151}
+  .side input[type=checkbox]{accent-color:var(--teal);width:17px;height:17px}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .toolbar span{color:var(--muted);font-size:14px;font-weight:600}
+  .list{display:grid;gap:12px}
+  .row{display:grid;grid-template-columns:150px 1fr auto;gap:16px;background:var(--card);border:1px solid var(--line);
+    border-radius:var(--r);padding:14px;align-items:center}
+  .row:hover{border-color:var(--teal)}
+  .row .ph{aspect-ratio:4/3;background:#f8fafc;border:1px solid var(--line);border-radius:10px;display:grid;place-items:center;overflow:hidden}
+  .row .ph img{height:100%;object-fit:contain;padding:8px}
+  .row h3{font-size:16px;margin-bottom:4px}
+  .row .meta{color:var(--muted);font-size:13.5px}
+  .row .tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  .tag{font-size:12px;font-weight:700;padding:4px 9px;border-radius:var(--pill);background:var(--teal-soft);color:var(--teal-dark)}
+  .tag.sale{background:#fef2f2;color:var(--sale)}
+  .pricebox{text-align:right;display:grid;gap:8px;justify-items:end}
+  .price{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+  .price s{display:block;color:var(--muted);font-size:13px;font-weight:600}
+  @media(max-width:920px){.layout{grid-template-columns:1fr}.side{position:static}}
+  @media(max-width:640px){
+    .row{grid-template-columns:96px 1fr}
+    .row .ph{aspect-ratio:1}
+    .pricebox{grid-column:1/-1;justify-items:stretch;text-align:left;display:flex;justify-content:space-between;align-items:center}
+    .head .search{order:3;flex-basis:100%}
+  }
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap"><span>Направление B · Каталог-витрина — много товара, быстрый выбор</span><span>Доставка по Пензе · <b>+7 (900) 000-00-00</b></span></div></div>
+
+<header>
+  <div class="wrap head">
+    <a class="logo" href="../index.html"><i>Т</i>ТехноДом</a>
+    <form class="search" onsubmit="return false">
+      <input type="search" placeholder="Поиск: холодильник, пылесос, чайник…" aria-label="Поиск по каталогу">
+      <button class="btn btn-primary" type="submit">Найти</button>
+    </form>
+    <a class="btn btn-outline" href="../cart.html">Корзина · 0</a>
+  </div>
+  <div class="wrap chipbar">
+    <a class="chip on" href="#">Все товары</a>
+    <a class="chip" href="#">Стиральные машины</a>
+    <a class="chip" href="#">Холодильники</a>
+    <a class="chip" href="#">Климат</a>
+    <a class="chip" href="#">Пылесосы</a>
+    <a class="chip" href="#">Мелкая техника</a>
+    <a class="chip" href="#">Товары для дома</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Каталог бытовой техники в Пензе</h1>
+    <p>Фильтруйте по категории, бренду и цене. Наличие подтверждает менеджер — оплата при получении, без онлайн-оплаты.</p>
+    <div class="cats" id="cats"></div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="layout">
+    <aside class="side">
+      <h3>Фильтры</h3>
+      <div style="padding:8px 0"><b style="font-size:14px">Категория</b>
+        <label><input type="checkbox" checked> Стиральные машины</label>
+        <label><input type="checkbox"> Холодильники</label>
+        <label><input type="checkbox"> Климат</label>
+        <label><input type="checkbox"> Пылесосы</label>
+      </div>
+      <div style="border-top:1px solid var(--line);padding:10px 0"><b style="font-size:14px">Наличие</b>
+        <label><input type="checkbox" checked> Только в наличии</label>
+      </div>
+      <div style="border-top:1px solid var(--line);padding:10px 0"><b style="font-size:14px">Цена, ₽</b>
+        <div style="display:flex;gap:8px;margin-top:6px">
+          <input type="number" placeholder="от" style="width:100%;height:40px;border:1px solid var(--line);border-radius:8px;padding:0 10px;font-family:inherit">
+          <input type="number" placeholder="до" style="width:100%;height:40px;border:1px solid var(--line);border-radius:8px;padding:0 10px;font-family:inherit">
+        </div>
+      </div>
+    </aside>
+
+    <div>
+      <div class="toolbar"><span id="count">Найдено товаров…</span>
+        <select style="height:46px;border:1px solid var(--line);border-radius:12px;padding:0 14px;font-family:inherit;font-weight:600;background:#fff">
+          <option>Популярные</option><option>Сначала дешёвые</option><option>Сначала дорогие</option><option>По названию</option>
+        </select>
+      </div>
+      <div class="list" id="list"></div>
+    </div>
+  </div>
+</main>
+
+<script src="../assets/js/data.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var f = new Intl.NumberFormat("ru-RU");
+    document.getElementById("cats").innerHTML = window.CATEGORIES.slice(0, 6).map(function (c) {
+      var n = window.PRODUCTS.filter(function (p) { return p.category === c.id; }).length;
+      return '<a class="cat" href="#">' + c.name + '<small>' + n + ' товаров</small></a>';
+    }).join("");
+    var list = window.PRODUCTS.slice().sort(function (a, b) {
+      return ((a.availability === "in-stock" ? 0 : 1) - (b.availability === "in-stock" ? 0 : 1)) || ((b.oldPrice ? 1 : 0) - (a.oldPrice ? 1 : 0));
+    }).slice(0, 8);
+    document.getElementById("count").textContent = "Найдено товаров: " + window.PRODUCTS.length;
+    document.getElementById("list").innerHTML = list.map(function (p) {
+      return '<article class="row">' +
+        '<div class="ph"><img src="' + window.imageFor(p.category) + '" alt="' + p.title + '" loading="lazy"></div>' +
+        '<div><h3>' + p.title + '</h3><div class="meta">' + p.brand + ' · ' + p.short + '</div>' +
+        '<div class="tags"><span class="tag">' + (p.availability === "in-stock" ? "В наличии" : "Под заказ") + '</span>' +
+        (p.oldPrice ? '<span class="tag sale">Скидка</span>' : '') + '</div></div>' +
+        '<div class="pricebox"><div><span class="price">' + f.format(p.price) + ' ₽</span>' +
+        (p.oldPrice ? '<s>' + f.format(p.oldPrice) + ' ₽</s>' : '') + '</div>' +
+        '<button class="btn btn-primary" type="button">В корзину</button></div></article>';
+    }).join("");
+  });
+</script>
+</body>
+</html>

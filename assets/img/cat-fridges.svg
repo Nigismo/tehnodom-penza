@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="Холодильники">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#eef2f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <rect x="1" y="1" width="398" height="298" fill="none" stroke="#e5e7eb" stroke-width="2"/>
+  <g transform="translate(200,132)" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <rect x="-42" y="-72" width="84" height="146" rx="10"/>
+    <line x1="-42" y1="-18" x2="42" y2="-18"/>
+    <line x1="26" y1="-52" x2="26" y2="-34"/>
+    <line x1="26" y1="2" x2="26" y2="26"/>
+  </g>
+  <text x="200" y="238" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="600" fill="#4b5563">Холодильники</text>
+  <text x="200" y="264" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#9aa3b2">Изображение-заглушка · замените на фото товара</text>
+</svg>

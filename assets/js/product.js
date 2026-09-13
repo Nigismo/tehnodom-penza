@@ -45,10 +45,7 @@
       '<div class="product-detail" style="margin-top:22px">' +
         '<div>' +
           '<div class="gallery-main"><img id="gallery-img" src="' + img + '" alt="' + s.escapeHtml(p.title) + '" width="600" height="450"></div>' +
-          '<div class="gallery-thumbs">' +
-            '<button type="button" aria-current="true" data-thumb="0"><img src="' + img + '" alt="Общий вид"></button>' +
-            '<button type="button" data-thumb="1" disabled title="Дополнительные фото появятся после загрузки"><img src="' + img + '" alt="Дополнительное фото"></button>' +
-          '</div>' +
+          '<p class="gallery-note">Фото — изображение-заглушка. Замените на реальные снимки товара в формате 4:3.</p>' +
         '</div>' +
         '<div>' +
           '<span class="product-brand">' + s.escapeHtml(p.brand) + '</span>' +
@@ -97,15 +94,6 @@
     document.getElementById("detail-add").addEventListener("click", function () {
       window.Shop.addToCart(p.id, parseInt(input.value, 10) || 1);
       window.location.href = "cart.html";
-    });
-
-    // Галерея (пока одна картинка — переключение безопасное)
-    document.querySelectorAll("[data-thumb]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        if (b.disabled) return;
-        document.querySelectorAll("[data-thumb]").forEach(function (x) { x.setAttribute("aria-current", "false"); });
-        b.setAttribute("aria-current", "true");
-      });
     });
 
     // Schema.org Product/Offer

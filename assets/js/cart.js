@@ -172,7 +172,7 @@
     var deliv = o.delivery === "city" ? "Доставка по Пензе" : "Самовывоз";
     document.getElementById("cart-main").innerHTML =
       '<div class="form-success" role="status">' +
-        '<div class="big-check">' + (window.Icons ? window.Icons.svg("check", 38) : "✓") + '</div>' +
+        '<div class="big-check">' + (window.Icons ? window.Icons.svg("check", 38) : "") + '</div>' +
         '<h2>Спасибо, заявка принята!</h2>' +
         '<p style="color:var(--text-soft);max-width:52ch;margin:0 auto 18px">' +
           s.escapeHtml(o.name) + ', мы позвоним на номер <b>' + s.escapeHtml(o.phone) + '</b> в рабочее время, ' +

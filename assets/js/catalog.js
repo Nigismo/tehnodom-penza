@@ -116,7 +116,7 @@
     els.pagination.innerHTML = "";
     els.status.innerHTML =
       '<div class="state-block is-error" role="alert">' +
-        '<div class="state-ico">' + (window.Icons ? window.Icons.svg("clock", 28) : "!") + '</div>' +
+        '<div class="state-ico">' + (window.Icons ? window.Icons.svg("clock", 28) : "") + '</div>' +
         '<h3>Не удалось загрузить каталог</h3>' +
         '<p>Похоже, данные не подгрузились из-за плохого соединения. Попробуйте ещё раз — фильтры сохранятся.</p>' +
         '<button class="btn btn-primary" type="button" id="retry-load">Повторить</button>' +
@@ -211,6 +211,18 @@
     });
     var resetBtn = document.getElementById("reset-filters-side");
     if (resetBtn) resetBtn.addEventListener("click", resetAll);
+
+    // Складные фильтры на мобильных
+    var ft = document.querySelector(".filters-toggle");
+    var fb = document.getElementById("filters-body");
+    if (ft && fb) {
+      ft.addEventListener("click", function () {
+        var open = fb.classList.toggle("is-open");
+        ft.setAttribute("aria-expanded", open ? "true" : "false");
+        var lbl = ft.querySelector("span:last-child");
+        if (lbl) lbl.textContent = open ? "Скрыть фильтры" : "Показать фильтры";
+      });
+    }
 
     document.addEventListener("click", function (e) {
       var pg = e.target.closest ? e.target.closest("[data-page]") : null;

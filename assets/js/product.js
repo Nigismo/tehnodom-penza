@@ -55,6 +55,7 @@
             (p.oldPrice ? '<span class="price-old">' + s.formatPrice(p.oldPrice) + '</span>' : "") + '</div>' +
           '<p style="margin-top:14px;color:var(--text-soft)">' + s.escapeHtml(p.desc) + '</p>' +
 
+          '<p class="detail-cart-note" id="detail-cart-note" role="status" aria-live="polite"></p>' +
           '<div class="detail-actions">' +
             '<div class="qty" role="group" aria-label="Количество">' +
               '<button type="button" data-qty="-1" aria-label="Меньше">−</button>' +
@@ -90,6 +91,14 @@
       var v = parseInt(input.value, 10) || 1;
       input.value = String(Math.max(1, Math.min(99, v)));
     });
+
+    var note = document.getElementById("detail-cart-note");
+    function updateNote() {
+      var inCart = (window.Shop.readCart().filter(function (x) { return x.id === p.id; })[0] || {}).qty || 0;
+      note.textContent = inCart ? "Уже в корзине: " + inCart + " шт. Можно добавить ещё." : "";
+    }
+    updateNote();
+    document.addEventListener("cart:change", updateNote);
 
     document.getElementById("detail-add").addEventListener("click", function () {
       window.Shop.addToCart(p.id, parseInt(input.value, 10) || 1);

@@ -82,6 +82,33 @@
     });
   }
 
+  /* ---------- Блок действий в карточке: «В корзину» или счётчик ---------- */
+  function actionsMarkup(p) {
+    var it = readCart().filter(function (x) { return x.id === p.id; })[0];
+    var ico = window.Icons ? window.Icons.svg("cart", 18) : "";
+    if (!it) {
+      return '<button class="btn btn-primary" type="button" data-add="' + escapeHtml(p.id) + '">' +
+        ico + '<span>В корзину</span></button>';
+    }
+    return '' +
+      '<div class="qty qty-sm">' +
+        '<button type="button" data-card-dec="' + escapeHtml(p.id) + '" aria-label="Убрать одну штуку">−</button>' +
+        '<input type="number" min="1" max="99" value="' + it.qty + '" data-card-qty="' + escapeHtml(p.id) + '" aria-label="В корзине, шт.">' +
+        '<button type="button" data-card-inc="' + escapeHtml(p.id) + '" aria-label="Добавить ещё одну штуку">+</button>' +
+      '</div>' +
+      '<a class="btn btn-ghost btn-compact" href="cart.html">В корзине</a>';
+  }
+
+  function refreshActions() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-actions]"), function (box) {
+      var p = findProduct(box.getAttribute("data-actions"));
+      if (!p) return;
+      var inCart = readCart().some(function (x) { return x.id === p.id; });
+      box.classList.toggle("is-in-cart", inCart);
+      box.innerHTML = actionsMarkup(p);
+    });
+  }
+
   /* ---------- Карточка товара ---------- */
   function productCard(p) {
     var av = availabilityInfo(p);
@@ -104,10 +131,7 @@
             '<div class="price-row"><span class="price">' + formatPrice(p.price) + '</span>' +
               (p.oldPrice ? '<span class="price-old">' + formatPrice(p.oldPrice) + '</span>' : "") +
             '</div>' +
-            '<div class="product-actions">' +
-              '<button class="btn btn-primary" type="button" data-add="' + escapeHtml(p.id) + '">' +
-                (window.Icons ? window.Icons.svg("cart", 18) : "") + '<span>В корзину</span></button>' +
-            '</div>' +
+            '<div class="product-actions" data-actions="' + escapeHtml(p.id) + '">' + actionsMarkup(p) + '</div>' +
           '</div>' +
         '</div>' +
       '</article>';
@@ -172,14 +196,32 @@
     });
   }
 
-  /* ---------- Делегирование кнопки «В корзину» ---------- */
+  /* ---------- Делегирование кнопок в карточках ---------- */
   function initAddButtons() {
     document.addEventListener("click", function (e) {
-      var btn = e.target.closest ? e.target.closest("[data-add]") : null;
-      if (!btn) return;
-      e.preventDefault();
-      addToCart(btn.getAttribute("data-add"), 1);
+      if (!e.target.closest) return;
+      var add = e.target.closest("[data-add]");
+      if (add) { e.preventDefault(); addToCart(add.getAttribute("data-add"), 1); return; }
+      var inc = e.target.closest("[data-card-inc]");
+      if (inc) {
+        var idI = inc.getAttribute("data-card-inc");
+        var curI = (readCart().filter(function (x) { return x.id === idI; })[0] || {}).qty || 0;
+        setQty(idI, curI + 1);
+        return;
+      }
+      var dec = e.target.closest("[data-card-dec]");
+      if (dec) {
+        var idD = dec.getAttribute("data-card-dec");
+        var curD = (readCart().filter(function (x) { return x.id === idD; })[0] || {}).qty || 1;
+        if (curD <= 1) removeFromCart(idD); else setQty(idD, curD - 1);
+      }
     });
+    document.addEventListener("change", function (e) {
+      var q = e.target.closest ? e.target.closest("[data-card-qty]") : null;
+      if (!q) return;
+      setQty(q.getAttribute("data-card-qty"), parseInt(q.value, 10) || 1);
+    });
+    document.addEventListener("cart:change", refreshActions);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -203,6 +245,7 @@
     readCart: readCart,
     writeCart: writeCart,
     addToCart: addToCart,
+    refreshActions: refreshActions,
     setQty: setQty,
     removeFromCart: removeFromCart,
     cartCount: cartCount,

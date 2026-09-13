@@ -110,6 +110,12 @@
   }
 
   /* ---------- Карточка товара ---------- */
+  function discountPercent(price, oldPrice) {
+    if (!oldPrice || oldPrice <= price) return "";
+    var pct = Math.round((1 - price / oldPrice) * 100);
+    return '<span class="price-discount">−' + pct + '%</span>';
+  }
+
   function productCard(p) {
     var av = availabilityInfo(p);
     var sale = p.oldPrice ? '<span class="badge badge-sale">Скидка</span>' : "";
@@ -129,7 +135,7 @@
           '<p class="product-specs">' + escapeHtml(p.short) + '</p>' +
           '<div class="product-foot">' +
             '<div class="price-row"><span class="price">' + formatPrice(p.price) + '</span>' +
-              (p.oldPrice ? '<span class="price-old">' + formatPrice(p.oldPrice) + '</span>' : "") +
+              (p.oldPrice ? '<span class="price-old">' + formatPrice(p.oldPrice) + '</span>' + discountPercent(p.price, p.oldPrice) : "") +
             '</div>' +
             '<div class="product-actions" data-actions="' + escapeHtml(p.id) + '">' + actionsMarkup(p) + '</div>' +
           '</div>' +
@@ -224,6 +230,21 @@
     document.addEventListener("cart:change", refreshActions);
   }
 
+  /* ---------- Анимация появления карточек при прокрутке ---------- */
+  function initCardReveal() {
+    if (!('IntersectionObserver' in window)) {
+      // Фолбэк: показать всё сразу
+      Array.prototype.forEach.call(document.querySelectorAll('.product-card'), function (c) { c.classList.add('is-visible'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('.product-card'), function (c) { obs.observe(c); });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     updateCartBadge();
     hydrateIcons();
@@ -231,6 +252,7 @@
     initNav();
     initCookie();
     initAddButtons();
+    initCardReveal();
   });
 
   /* ---------- Экспорт ---------- */
@@ -250,6 +272,7 @@
     removeFromCart: removeFromCart,
     cartCount: cartCount,
     cartTotals: cartTotals,
-    updateCartBadge: updateCartBadge
+    updateCartBadge: updateCartBadge,
+    initCardReveal: initCardReveal
   };
 })();

@@ -154,6 +154,7 @@
     els.grid.hidden = false;
     els.status.innerHTML = "";
     els.grid.innerHTML = slice.map(window.Shop.productCard).join("");
+    window.Shop.initCardReveal();
 
     // Пагинация
     if (pages <= 1) { els.pagination.innerHTML = ""; return; }

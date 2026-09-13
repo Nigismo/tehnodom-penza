@@ -4,12 +4,12 @@
   var s = window.Shop;
 
   var CAT_ICON = {
-    washing: "spark",
-    fridges: "box",
-    climate: "leaf",
-    vacuum: "spark",
-    small: "box",
-    home: "star"
+    washing: "washer",
+    fridges: "fridge",
+    climate: "snow",
+    vacuum: "vacuum",
+    small: "kettle",
+    home: "house"
   };
 
   function renderCategories() {
@@ -36,6 +36,7 @@
       return (b.oldPrice ? 1 : 0) - (a.oldPrice ? 1 : 0);
     }).slice(0, 8);
     box.innerHTML = list.map(s.productCard).join("");
+    s.initCardReveal();
   }
 
   function addStructuredData() {

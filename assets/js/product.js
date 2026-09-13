@@ -131,5 +131,6 @@
     var p = id ? window.Shop.findProduct(id) : null;
     if (!p) { renderNotFound(); return; }
     renderProduct(p);
+    window.Shop.initCardReveal();
   });
 })();

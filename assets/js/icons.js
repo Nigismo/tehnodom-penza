@@ -18,7 +18,13 @@
     star: '<path d="M12 4l2.4 5 5.6.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.6-.8z"/>',
     chat: '<path d="M4 5.5h16v11H9l-5 4z"/>',
     leaf: '<path d="M19 5c-8 0-13 4-13 10v4"/><path d="M19 5c0 7-4 11-11 11"/>',
-    spark: '<path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><path d="M6.5 6.5l3 3M14.5 14.5l3 3M17.5 6.5l-3 3M9.5 14.5l-3 3"/>'
+    spark: '<path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><path d="M6.5 6.5l3 3M14.5 14.5l3 3M17.5 6.5l-3 3M9.5 14.5l-3 3"/>',
+    washer: '<rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="12" cy="14" r="4.5"/><circle cx="7.5" cy="6.5" r=".9"/>',
+    fridge: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M7 10h10"/><path d="M14.5 5.5v2"/><path d="M14.5 12.5v3"/>',
+    snow: '<path d="M12 3v18"/><path d="M4.2 7.5l15.6 9"/><path d="M19.8 7.5l-15.6 9"/>',
+    vacuum: '<circle cx="12" cy="14" r="7"/><circle cx="12" cy="14" r="2"/><path d="M12 7V4"/><circle cx="12" cy="3" r=".9"/>',
+    kettle: '<path d="M6 11h9v7a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z"/><path d="M15 12.6h2.2a1.8 1.8 0 0 1 0 3.6H15"/><path d="M9 11V8.5a2 2 0 0 1 4 0V11"/>',
+    house: '<path d="M4 11l8-6.5 8 6.5"/><path d="M6.5 10v9h11v-9"/><path d="M10 19v-4.5h4V19"/>'
   };
   function svg(name, size) {
     var s = size || 20;

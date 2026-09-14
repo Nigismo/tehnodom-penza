@@ -326,13 +326,20 @@ main { display: block; padding-bottom: 64px; }
 .qty-sm input { width: 46px; height: 42px; }
 .btn-compact { min-height: 42px; padding: 9px 14px; font-size: 14px; }
 
-/* Появление карточки при прокрутке (IntersectionObserver) */
-.product-card { opacity: 0; transform: translateY(20px); }
-.product-card.is-visible { opacity: 1; transform: translateY(0); transition: opacity .5s var(--ease), transform .5s var(--ease), border-color .25s var(--ease), box-shadow .3s var(--ease); }
-.product-card.is-visible:hover { transform: translateY(-5px); }
+/* Плавное появление карточек */
+@keyframes card-appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.product-card {
+  animation: card-appear .35s var(--ease) backwards;
+}
 /* Каскадная задержка для карточек в сетке */
-.product-card:nth-child(3n+2).is-visible { transition-delay: .06s; }
-.product-card:nth-child(3n+3).is-visible { transition-delay: .12s; }
+.product-card:nth-child(2) { animation-delay: .04s; }
+.product-card:nth-child(3) { animation-delay: .08s; }
+.product-card:nth-child(4) { animation-delay: .12s; }
+.product-card:nth-child(5) { animation-delay: .16s; }
+.product-card:nth-child(6) { animation-delay: .20s; }
 
 /* Бейджи */
 .badge {

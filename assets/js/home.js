@@ -36,7 +36,6 @@
       return (b.oldPrice ? 1 : 0) - (a.oldPrice ? 1 : 0);
     }).slice(0, 8);
     box.innerHTML = list.map(s.productCard).join("");
-    s.initCardReveal();
   }
 
   function addStructuredData() {

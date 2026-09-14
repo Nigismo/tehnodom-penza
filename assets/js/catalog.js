@@ -154,7 +154,6 @@
     els.grid.hidden = false;
     els.status.innerHTML = "";
     els.grid.innerHTML = slice.map(window.Shop.productCard).join("");
-    window.Shop.initCardReveal();
 
     // Пагинация
     if (pages <= 1) { els.pagination.innerHTML = ""; return; }
@@ -182,7 +181,10 @@
         if (new URLSearchParams(location.search).get("simulateError") === "1") { showError(); return; }
         var list = sortList((window.PRODUCTS || []).filter(matches));
         renderResults(list);
-      } catch (e) { showError(); }
+      } catch (e) {
+        console.error("CATALOG RUN ERROR:", e);
+        showError();
+      }
     }, 450);
   }
 

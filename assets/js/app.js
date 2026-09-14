@@ -230,21 +230,6 @@
     document.addEventListener("cart:change", refreshActions);
   }
 
-  /* ---------- Анимация появления карточек при прокрутке ---------- */
-  function initCardReveal() {
-    if (!('IntersectionObserver' in window)) {
-      // Фолбэк: показать всё сразу
-      Array.prototype.forEach.call(document.querySelectorAll('.product-card'), function (c) { c.classList.add('is-visible'); });
-      return;
-    }
-    var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-    Array.prototype.forEach.call(document.querySelectorAll('.product-card'), function (c) { obs.observe(c); });
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     updateCartBadge();
     hydrateIcons();
@@ -252,7 +237,6 @@
     initNav();
     initCookie();
     initAddButtons();
-    initCardReveal();
   });
 
   /* ---------- Экспорт ---------- */
@@ -272,7 +256,6 @@
     removeFromCart: removeFromCart,
     cartCount: cartCount,
     cartTotals: cartTotals,
-    updateCartBadge: updateCartBadge,
-    initCardReveal: initCardReveal
+    updateCartBadge: updateCartBadge
   };
 })();
